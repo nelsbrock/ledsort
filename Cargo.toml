@@ -1,0 +1,30 @@
+[package]
+name = "ledsort"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+panic-halt = "*"
+smart-leds = "0.3"
+ws2812-spi = "0.4"
+rand = { version = "0.8", default-features = false, features = ["small_rng"] }
+ufmt = "0.1"
+
+[dependencies.arduino-hal]
+git = "https://github.com/Rahix/avr-hal"
+rev = "f99550debcd9a168da4486fed4388caaee067aa9"
+features = ["arduino-uno"]
+
+[profile.dev]
+panic = "abort"
+lto = true
+opt-level = "s"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+debug = true
+lto = true
+opt-level = "s"
